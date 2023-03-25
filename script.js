@@ -18,56 +18,78 @@ function getPlayerChoice() {
     let playerChoiceOG = prompt("Rock, Paper, Scissors!");
     let playerChoice = playerChoiceOG.toUpperCase();
     if (playerChoice != "ROCK" && playerChoice != "PAPER" && playerChoice != "SCISSORS" ) {
-        console.log("Invalid option")
+        playerChoice = "Invalid option; round will not be counted. (check spelling)"
+        return playerChoice;
     }
     else {
         return playerChoice;
     }
 }
 
-let playerSelection = getPlayerChoice();
-let computerSelection = getComputerChoice();
-console.log(playerSelection);
-console.log(computerSelection);
-console.log(playRound(playerSelection, computerSelection)); 
+function playGame() {
 
+    let wins = 0;
+    let losses = 0;
+    let draws = 0;
+    let notCounted = 0;
 
-function playRound(player, computer) {  
+    for (let i = 0; i < 5; i++) {
+
+let player = getPlayerChoice();
+let computer = getComputerChoice();
+console.log(player);
+console.log("Computer Chose: " + computer);
+
+if (player != "ROCK" && player != "PAPER" && player != "SCISSORS" ) {
+    console.log("Round not counted.");
+    notCounted++;
+}
+else {
+
     if (player === computer) {
-        return "Draw!";
+        console.log("Draw!");
+        draws++;
     }
     else {
         switch (player) {
             case "ROCK":
             if (computer === "PAPER") {
-                return "You Lose! Paper Beats Rock";
-                losses = losses + 1;
+                console.log("You Lose! Paper Beats Rock");
+                losses++;
             }
             else {
-                return "You Win! Rock Beats Scissors";
-                wins = wins + 1;
+                console.log("You Win! Rock Beats Scissors");
+                wins++;
             }
             break;
             case "PAPER":
             if (computer === "SCISSORS") {
-                return "You Lose! Scissors Beats Paper";
-                losses = losses + 1;
+                console.log("You Lose! Scissors Beats Paper");
+                losses++;
             }
             else {
-                return "You Win! Paper Beats Rock";
-                wins = wins + 1;
+                console.log("You Win! Paper Beats Rock");
+                wins++;
             }
             break;
             case "SCISSORS":
             if (computer === "ROCK") {
-                return "You Lose! Rock Beats Scissors";
-                losses = losses + 1;
+                console.log("You Lose! Rock Beats Scissors");
+                losses++;
             }
             else {
-                return "You Win! Scissors Beats Paper";
-                wins = wins + 1;
+                console.log("You Win! Scissors Beats Paper");
+                wins++;
             }
             break;
         }
     }
 }
+}
+
+let score = "Score: " + wins + " : " + losses + "." + "(Draws: " + draws + ", Not Counted:" + notCounted + ")";
+return score;
+
+}
+
+console.log(playGame());
