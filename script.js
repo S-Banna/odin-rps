@@ -35,14 +35,11 @@ paper.choice = "PAPER";
 let scissors = document.querySelector("#scissors");
 scissors.addEventListener("click", playRound);
 scissors.choice = "SCISSORS";
-
+let wins = 0;
+let losses = 0;
+let draws = 0;
 
 function playRound() {
-
-    let wins = 0;
-    let losses = 0;
-    let draws = 0;
-    let notCounted = 0;
 
 let player = event.currentTarget.choice;
 let playerChoice = document.querySelector(".playerChoice");
@@ -50,54 +47,49 @@ playerChoice.textContent = event.currentTarget.choice;
 let computer = getComputerChoice();
 let compChoice = document.querySelector(".compChoice");
 compChoice.textContent = computer;
+let resultDisplay = document.querySelector(".result");
 
-if (player != "ROCK" && player != "PAPER" && player != "SCISSORS" ) {
-    console.log("Round not counted.");
-    notCounted++;
-}
-else {
-
-    if (player === computer) {
-        console.log("Draw!");
+if (player === computer) {
+        resultDisplay.textContent = "Draw!";
         draws++;
     }
     else {
         switch (player) {
-            case "ROCK":
-            if (computer === "PAPER") {
-                console.log("You Lose! Paper Beats Rock");
-                losses++;
-            }
-            else {
-                console.log("You Win! Rock Beats Scissors");
-                wins++;
-            }
-            break;
-            case "PAPER":
-            if (computer === "SCISSORS") {
-                console.log("You Lose! Scissors Beats Paper");
-                losses++;
-            }
-            else {
-                console.log("You Win! Paper Beats Rock");
-                wins++;
-            }
-            break;
-            case "SCISSORS":
-            if (computer === "ROCK") {
-                console.log("You Lose! Rock Beats Scissors");
-                losses++;
-            }
-            else {
-                console.log("You Win! Scissors Beats Paper");
-                wins++;
-            }
-            break;
+        case "ROCK":
+        if (computer === "PAPER") {
+            resultDisplay.textContent = "You Lose! Paper Beats Rock";
+            losses++;
         }
+        else {
+            resultDisplay.textContent = "You Win! Rock Beats Scissors";
+            wins++;
+        }
+        break;
+        case "PAPER":
+        if (computer === "SCISSORS") {
+            resultDisplay.textContent = "You Lose! Scissors Beats Paper";
+            losses++;
+        }
+        else {
+            resultDisplay.textContent = "You Win! Paper Beats Rock";
+            wins++;
+        }
+        break;
+        case "SCISSORS":
+        if (computer === "ROCK") {
+            resultDisplay.textContent = "You Lose! Rock Beats Scissors";
+            losses++;
+        }
+        else {
+            resultDisplay.textContent = "You Win! Scissors Beats Paper";
+            wins++;
+        }
+        break;
     }
 }
 
-
-let score = "Score: " + wins + " : " + losses + "." + "(Draws: " + draws + ", Not Counted:" + notCounted + ")";
+let score = "Score: " + wins + " : " + losses + "." + " (Draws: " + draws + ")";
+let scoreDisplay = document.querySelector(".score");
+scoreDisplay.textContent = score;
 return score;
 }
