@@ -26,19 +26,30 @@ function getPlayerChoice() {
     }
 }
 
-function playGame() {
+let rock = document.querySelector("#rock");
+rock.addEventListener("click", playRound);
+rock.choice = "ROCK";
+let paper = document.querySelector("#paper");
+paper.addEventListener("click", playRound);
+paper.choice = "PAPER";
+let scissors = document.querySelector("#scissors");
+scissors.addEventListener("click", playRound);
+scissors.choice = "SCISSORS";
+
+
+function playRound() {
 
     let wins = 0;
     let losses = 0;
     let draws = 0;
     let notCounted = 0;
 
-    for (let i = 0; i < 5; i++) {
-
-let player = getPlayerChoice();
+let player = event.currentTarget.choice;
+let playerChoice = document.querySelector(".playerChoice");
+playerChoice.textContent = event.currentTarget.choice;
 let computer = getComputerChoice();
-console.log(player);
-console.log("Computer Chose: " + computer);
+let compChoice = document.querySelector(".compChoice");
+compChoice.textContent = computer;
 
 if (player != "ROCK" && player != "PAPER" && player != "SCISSORS" ) {
     console.log("Round not counted.");
@@ -85,11 +96,8 @@ else {
         }
     }
 }
-}
+
 
 let score = "Score: " + wins + " : " + losses + "." + "(Draws: " + draws + ", Not Counted:" + notCounted + ")";
 return score;
-
 }
-
-console.log(playGame());
