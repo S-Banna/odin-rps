@@ -35,6 +35,7 @@ paper.choice = "PAPER";
 let scissors = document.querySelector("#scissors");
 scissors.addEventListener("click", playRound);
 scissors.choice = "SCISSORS";
+let winner = document.querySelector(".winner");
 let wins = 0;
 let losses = 0;
 let draws = 0;
@@ -48,6 +49,7 @@ let computer = getComputerChoice();
 let compChoice = document.querySelector(".compChoice");
 compChoice.textContent = computer;
 let resultDisplay = document.querySelector(".result");
+winner.textContent = "";
 
 if (player === computer) {
         resultDisplay.textContent = "Draw!";
@@ -87,6 +89,19 @@ if (player === computer) {
         break;
     }
 }
+
+if (wins > 4) {
+    winner.textContent = "You Won!" + "(" + wins + "  : " + losses + " )";
+    wins = 0;
+    losses = 0;
+    draws = 0;
+}
+if (losses > 4) {
+    winner.textContent = "You Lost!" + "(" + wins + " : " + losses + " )";
+    wins = 0;
+    losses = 0;
+    draws = 0;
+} 
 
 let score = "Score: " + wins + " : " + losses + "." + " (Draws: " + draws + ")";
 let scoreDisplay = document.querySelector(".score");
